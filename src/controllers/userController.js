@@ -9,7 +9,7 @@ const getAllUsers = async (req, res) => {
     }
 };
 
-const getUser = async (req, res) => {
+const getUserById = async (req, res) => {
     try {
         const user = await userModel.getUserById(req.params.id);
         if (!user) {
@@ -57,4 +57,4 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = { getAllUsers, getUser, createUser, updateUser, deleteUser };
+module.exports = { getAllUsers, getUserById, createUser, updateUser, deleteUser };
