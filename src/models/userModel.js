@@ -36,6 +36,4 @@ const deleteUser = async (id) => {
     return { message: "Usuário deletado com sucesso." };
 };
 
-
-
-module.exports = { getUsers, getUserById, createUser, updateUser, deleteUser }
+module.exports = { getUsers, getUserById, createUser, updateUser, deleteUser };
