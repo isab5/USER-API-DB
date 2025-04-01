@@ -1,6 +1,6 @@
-CREATE DATABASE cadastro;
+CREATE DATABASE rede_social;
 
-\c cadastro
+\c rede_social
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -13,3 +13,15 @@ INSERT INTO users (name, email) VALUES
     ('Marcelo Carboni', 'marcelo.carboni@email.com'),
     ('Eduardo Correia', 'eduardo.correia@email.com'),
     ('Felipe Santos', 'felipe.santos@email.com');
+
+CREATE TABLE posts (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) NOT NULL,
+    description VARCHAR(200)
+);
+
+INSERT INTO posts (user_id, description) VALUES 
+    ( 1, 'EU AMO DS'),
+    ( 2, 'EU AMO BACK-END'),
+    ( 3, 'SOCORROOOOOOOO'),
+    ( 4, 'VAI CORINTHIANS');
