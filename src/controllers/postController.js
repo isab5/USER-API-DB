@@ -54,4 +54,16 @@ const deletePost = async (req, res) => {
     }
 };
 
-module.exports = { getAllPosts, getPostById, createPost, updatePost, deletePost};
+const getPostByUser = async (req, res) => {
+    try {
+        const post = await postModel.getPostByUser(req.body);
+        if (!post) {
+            return res.status(404).json({ message: "Posts do usuário não encontrado!" });
+        }
+        res.status(200).json(post);
+    } catch (error) {
+        res.status(404).json({ message: "Erro ao buscar posts do usuário" });
+    }
+};
+
+module.exports = { getAllPosts, getPostById, createPost, updatePost, deletePost, getPostByUser };
