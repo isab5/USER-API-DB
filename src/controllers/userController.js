@@ -2,7 +2,8 @@ const userModel = require("../models/userModel");
 
 const getAllUsers = async (req, res) => {
     try {
-        const users = await userModel.getUsers();
+        const { name } = req.query;
+        const users = await userModel.getUsers(name);
         res.status(200).json(users);
     } catch (error) {
         res.status(404).json({ message: "Erro ao buscar usuários!"});

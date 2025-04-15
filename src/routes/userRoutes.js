@@ -21,6 +21,7 @@ const upload = require("../config/upload");
  *         name: name
  *         schema:
  *           type: string
+ *         description: Filtro por nome
  *     responses:
  *       200:
  *         description: Lista de usuários
