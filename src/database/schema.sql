@@ -25,3 +25,5 @@ INSERT INTO posts (user_id, description) VALUES
     ( 2, 'EU AMO BACK-END'),
     ( 3, 'SOCORROOOOOOOO'),
     ( 4, 'VAI CORINTHIANS');
+
+    ALTER TABLE users ADD COLUMN photo TEXT;
