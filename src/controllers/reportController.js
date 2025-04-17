@@ -5,23 +5,19 @@ const userModel = require("../models/userModel");
 
 const exportUserCSV = async (req, res) => {
     try {
-        const ingressos =  await ingressosModel.getAllIngressos();
+        const users =  await userModel.getUsers();
 
-        res.setHeader("Content-Disposition", "attachment; filename=ingressos.csv");
+        res.setHeader("Content-Disposition", "attachment; filename=users.csv");
         res.setHeader("Content-Type", "text-csv");
 
         const csvStream = format({ headers: true});
         csvStream.pipe(res);
 
-        ingressos.forEach((ingresso) => {
+        users.forEach((user) => {
             csvStream.write({
-                Id: ingresso.id,
-                Evento: ingresso.evento,
-                Local: ingresso.local,
-                Data: ingresso.data_evento,
-                Categoria: ingresso.categoria,
-                Preço: ingresso.preco,
-                Quantidade: ingresso.quantidade_disponivel,
+                Id: user.id,
+                Name: user.name,
+                Email: user.email,
             });
         });
         
@@ -31,28 +27,28 @@ const exportUserCSV = async (req, res) => {
     }
 };
 
-const exportIngressosPDF = async (req, res) => {
+const exportUserPDF = async (req, res) => {
     try {
-        const ingressos = await ingressosModel.getAllIngressos();
+        const user = await userModel.getUsers();
 
         res.setHeader("Content-Type", "application/pdf");
-        res.setHeader("Content-Disposition", "inline; filename=ingressos.pdf")
+        res.setHeader("Content-Disposition", "inline; filename=users.pdf")
 
         const doc = new PDFDocument();
         doc.pipe(res);
 
         //Titulo
-        doc.fontSize(20).text("Relatório de Ingressos", {align: "center"});
+        doc.fontSize(20).text("Relatório de Usuários", {align: "center"});
         doc.moveDown();
 
         //Cabeçalho
-        doc.fontSize(12).text("Id | Evento | Local | Data |Categoria | Preço | Quantidade", {align: "center"});
+        doc.fontSize(12).text("Id | Name | Email", {align: "center"});
         doc.moveDown(0.5);
 
-        //Add dados dos Ingressos
-        ingressos.forEach((ingresso) => {
+        //Add dados dos Usuários
+        user.forEach((user) => {
             doc.fontSize(11).text(
-                `${ingresso.id} | ${ingresso.evento} | ${ingresso.local} | ${ingresso.data_evento} | ${ingresso.categoria} | ${ingresso.preco} | ${ingresso.quantidade_disponivel}`
+                `${user.id} | ${user.name} | ${user.email}`
             );
         });
 
@@ -62,4 +58,4 @@ const exportIngressosPDF = async (req, res) => {
     }
 };
 
-module.exports = { exportIngressosCSV, exportIngressosPDF };
+module.exports = { exportUserCSV, exportUserPDF };
