@@ -5,7 +5,8 @@ CREATE DATABASE rede_social;
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL
+    email VARCHAR(100) UNIQUE NOT NULL,
+    photo TEXT
 );
 
 INSERT INTO users (name, email) VALUES 
@@ -17,7 +18,8 @@ INSERT INTO users (name, email) VALUES
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id) NOT NULL,
-    description VARCHAR(200)
+    description VARCHAR(200),
+    photo TEXT
 );
 
 INSERT INTO posts (user_id, description) VALUES 
@@ -25,5 +27,3 @@ INSERT INTO posts (user_id, description) VALUES
     ( 2, 'EU AMO BACK-END'),
     ( 3, 'SOCORROOOOOOOO'),
     ( 4, 'VAI CORINTHIANS');
-
-    ALTER TABLE users ADD COLUMN photo TEXT;

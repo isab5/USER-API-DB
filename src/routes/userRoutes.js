@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
 const upload = require("../config/upload");
+const apiKeyMiddleware = require('../config/apiKey.js')
+
+router.use(apiKeyMiddleware);
 
 /**
  * @swagger
@@ -118,7 +121,7 @@ router.put("/users/:id", userController.updateUser);
  *           type: integer
  *     responses:
  *       200:
- *         description: Casa deletada
+ *         description: User deletado
  */
 router.delete("/users/:id", userController.deleteUser);
 

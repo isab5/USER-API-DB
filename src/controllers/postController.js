@@ -24,7 +24,8 @@ const getPostById = async (req, res) => {
 const createPost = async (req, res) => {
     try {
         const { user_id, description } = req.body;
-        const newPost = await postModel.createPost(user_id, description);
+        const photo = req.file ? req.file.filename : null;
+        const newPost = await postModel.createPost(user_id, description, photo);
         res.status(201).json(newPost);
     } catch (error) {
      console.log(error);
@@ -56,7 +57,8 @@ const deletePost = async (req, res) => {
 
 const getPostByUser = async (req, res) => {
     try {
-        const post = await postModel.getPostByUser(req.body);
+        const { user_id } = req.body;
+        const post = await postModel.getPostByUser(req.body, user_id);
         if (!post) {
             return res.status(404).json({ message: "Posts do usuário não encontrado!" });
         }
